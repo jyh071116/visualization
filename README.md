@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## README
 
-## Getting Started
+### 주요 기능
+- **데이터 시각화**: 다양한 차트(Are, Bar, Line, Pie, Radar, Scatter)를 통해 데이터를 시각적으로 표현
+- **반응형 디자인**: Tailwind CSS를 활용하여 화면 크기에 따라 유연하게 레이아웃을 조정할 수 있음
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Recharts 라이브러리 장점/단점, 선택 이유
+#### 장점
+1. 직관적인 API 덕분에 코드가 간결하고, 차트 구성이 쉽다.
+2. 다양한 차트 형식을 기본적으로 제공하므로 여러 종류의 데이터를 쉽게 시각화할 수 있다.
+3. 기본적으로 반응형 차트를 제공하여 다양한 화면 크기에서도 차트가 잘 표시된다.
+4. 차트 스타일, 색상, 크기 등을 쉽게 커스터마이징할 수 있어 디자인하기 쉽다.
+#### 단점
+1. 인터렉션이 많거나 복잡한 데이터를 처리하기에는 한계가 있다.
+2. 데이터 포인트가 매우 많아질 경우 성능이 저하될 수 있다.
+3. 다른 라이브러리처럼 다양한 확장 플러그인이나 애니메이션 효과가 제한적이다.
+### 선택 이유
+Recharts는 React와 호환성이 좋고, 배우기 어렵지 않고, 대부분의 데이터 시각화 요구를 충족할 만큼 충분한 기능이 존재한다.
+복잡한 데이터셋이 아닌 단순한 데이터셋을 다루기 때문에 Recharts를 사용하여 빠르게 코드를 작성할 수 있다.

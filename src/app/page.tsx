@@ -1,101 +1,205 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useEffect, useState } from "react";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ScatterChart,
+  Scatter,
+  ZAxis
+} from "recharts";
+
+// 데이터 타입 정의
+interface DataType {
+  name: string;
+  uv: number;
+  pv: number;
+  amt: number;
+}
+
+interface PieDataType {
+  name: string;
+  value: number;
+}
+
+interface RadarDataType {
+  subject: string;
+  A: number;
+  B: number;
+  fullMark: number;
+}
+
+interface ScatterDataType {
+  x: number;
+  y: number;
+  z: number;
+}
+
+export default function App() {
+  const [data, setData] = useState<DataType[]>([]);
+  const [pieData, setPieData] = useState<PieDataType[]>([]);
+  const [radarData, setRadarData] = useState<RadarDataType[]>([]);
+  const [scatterData, setScatterData] = useState<ScatterDataType[]>([]);
+
+  useEffect(() => {
+    setData([
+      { name: "A", uv: 4000, pv: 2400, amt: 2400 },
+      { name: "B", uv: 3000, pv: 1398, amt: 2210 },
+      { name: "C", uv: 2000, pv: 9800, amt: 2290 },
+      { name: "D", uv: 2780, pv: 3908, amt: 2000 },
+      { name: "E", uv: 1890, pv: 4800, amt: 2181 },
+      { name: "F", uv: 2390, pv: 3800, amt: 2500 },
+      { name: "G", uv: 3490, pv: 4300, amt: 2100 }
+    ]);
+
+    setPieData([
+      { name: "A", value: 400 },
+      { name: "B", value: 300 },
+      { name: "C", value: 300 },
+      { name: "D", value: 200 }
+    ]);
+
+    setRadarData([
+      { subject: "Math", A: 120, B: 110, fullMark: 150 },
+      { subject: "Chinese", A: 98, B: 130, fullMark: 150 },
+      { subject: "English", A: 86, B: 130, fullMark: 150 },
+      { subject: "Geography", A: 99, B: 100, fullMark: 150 },
+      { subject: "Physics", A: 85, B: 90, fullMark: 150 },
+      { subject: "History", A: 65, B: 85, fullMark: 150 }
+    ]);
+
+    setScatterData([
+      { x: 100, y: 200, z: 200 },
+      { x: 120, y: 100, z: 260 },
+      { x: 170, y: 300, z: 400 },
+      { x: 140, y: 250, z: 280 },
+      { x: 150, y: 400, z: 500 },
+      { x: 110, y: 280, z: 200 }
+    ]);
+  }, []);
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-gray-100 p-8 text-black">
+      <h1 className="text-2xl font-bold text-center mb-8">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        {/* Area Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Area Chart</h2>
+          <AreaChart
+            width={400}
+            height={250}
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="url(#colorUv)" />
+          </AreaChart>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Bar Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Bar Chart</h2>
+          <BarChart width={400} height={250} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="pv" fill="#8884d8" />
+            <Bar dataKey="uv" fill="#82ca9d" />
+          </BarChart>
+        </div>
+
+        {/* Line Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Line Chart</h2>
+          <LineChart width={400} height={250} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          </LineChart>
+        </div>
+
+        {/* Pie Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Pie Chart</h2>
+          <PieChart width={400} height={250}>
+            <Pie
+              data={pieData}
+              cx={210}
+              cy={110}
+              labelLine={false}
+              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </div>
+
+        {/* Radar Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Radar Chart</h2>
+          <RadarChart cx={225} cy={110} outerRadius={80} width={400} height={250} data={radarData}>
+            <PolarGrid />
+            <PolarAngleAxis dataKey="subject" />
+            <PolarRadiusAxis angle={30} domain={[0, 150]} />
+            <Radar name="Student A" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar name="Student B" dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+            <Legend />
+          </RadarChart>
+        </div>
+
+        {/* Scatter Chart */}
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-4">Scatter Chart</h2>
+          <ScatterChart width={400} height={250}>
+            <CartesianGrid />
+            <XAxis type="number" dataKey="x" name="X Axis" />
+            <YAxis type="number" dataKey="y" name="Y Axis" />
+            <ZAxis type="number" dataKey="z" range={[60, 400]} name="Z Axis" />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Scatter name="Points" data={scatterData} fill="#8884d8" />
+          </ScatterChart>
+        </div>
+      </div>
     </div>
   );
 }
